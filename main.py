@@ -1,6 +1,7 @@
-def main():
-    print("Hello from disease-graph-model!")
+import GraphManager
 
+GM = GraphManager()
 
-if __name__ == "__main__":
-    main()
+GraphManager.loadProvisional()
+
+GraphManager.showGraph()

@@ -1,4 +1,5 @@
 import networkx as nx
+import matplotlib as plt
 import Person
 
 class GraphManager():
@@ -20,3 +21,6 @@ class GraphManager():
             for j in range(9):
                 self.add_edge(i, j, weight=0.2)
 
+    def showGraph(self):
+        nx.draw_circular(self.G, with_labels=True)
+        plt.show()
