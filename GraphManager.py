@@ -15,7 +15,7 @@ class GraphManager():
         persons = []
 
         # Crear personas y añadirlas como nodos
-        for i in range(9):
+        for i in range(10):
             p = Person(i, i * 10 + 1)
             persons.append(p)
             self.G.add_node(p)
