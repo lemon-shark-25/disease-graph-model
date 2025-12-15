@@ -1,7 +1,7 @@
-import GraphManager
+from GraphManager import GraphManager
 
 GM = GraphManager()
 
-GraphManager.loadProvisional()
+GM.loadProvisional()
 
-GraphManager.showGraph()
+GM.showGraph()
