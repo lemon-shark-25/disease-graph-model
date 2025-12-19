@@ -2,6 +2,6 @@ from GraphManager import GraphManager
 
 GM = GraphManager()
 
-GM.loadProvisional()
+GM.loadGraph()
 
 GM.showGraph()

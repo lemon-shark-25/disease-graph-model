@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import csv
 from Person import Person
 
 class GraphManager():
@@ -8,23 +9,48 @@ class GraphManager():
         self.G = nx.Graph()
         self.time = 0
 
-    def loadPerson(self):
-        pass
+    def loadNodes(self, path):
+        """
+        Carga personas desde CSV y devuelve un diccionario {id: Person}
+        """
+        persons = {}
 
-    def loadProvisional(self):
-        persons = []
+        with open(path, newline="") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                pid = int(row["id"])
+                person = Person(row["nombre"], int(row["edad"]))
 
-        # Crear personas y añadirlas como nodos
-        for i in range(10):
-            p = Person(i, i * 10 + 1)
-            persons.append(p)
-            self.G.add_node(p)
+                persons[pid] = person
+                self.G.add_node(person)
 
-        # Conectar todas las personas entre sí
-        for i in range(len(persons)):
-            for j in range(i + 1, len(persons)):
-                self.G.add_edge(persons[i], persons[j], weight=0.2)
+        return persons
+
+
+    def loadEdges(self, path, persons):
+        """
+        Carga aristas desde CSV usando los IDs de persons
+        """
+        with open(path, newline="") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                n1 = int(row["nodo1"])
+                n2 = int(row["nodo2"])
+                weight = float(row["peso"])
+
+                # Validación mínima
+                if n1 not in persons or n2 not in persons:
+                    continue
+
+                self.G.add_edge(persons[n1], persons[n2], weight=weight)
+
+    def loadGraph(self):
+        """
+        Método principal de carga del grafo
+        """
+        persons = self.loadNodes("./data/nodes.csv")
+        self.loadEdges("./data/edges.csv", persons)
 
     def showGraph(self):
-        nx.draw_circular(self.G, with_labels=False)
+        nx.draw_networkx(self.G, with_labels=False)
         plt.show()
