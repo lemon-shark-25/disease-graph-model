@@ -9,7 +9,7 @@ class GraphManager():
         self.G = nx.Graph()
         self.time = 0
 
-    def loadNodes(self, path):
+    def _loadNodes(self, path):
         """
         Carga personas desde CSV y devuelve un diccionario {id: Person}
         """
@@ -27,7 +27,7 @@ class GraphManager():
         return persons
 
 
-    def loadEdges(self, path, persons):
+    def _loadEdges(self, path, persons):
         """
         Carga aristas desde CSV usando los IDs de persons
         """
@@ -48,8 +48,8 @@ class GraphManager():
         """
         Método principal de carga del grafo
         """
-        persons = self.loadNodes("./data/nodes.csv")
-        self.loadEdges("./data/edges.csv", persons)
+        persons = self._loadNodes("./data/nodes.csv")
+        self._loadEdges("./data/edges.csv", persons)
 
     def showGraph(self):
         nx.draw_networkx(self.G, with_labels=False)
