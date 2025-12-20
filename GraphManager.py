@@ -52,7 +52,7 @@ class GraphManager():
         self._loadEdges("./data/edges.csv", persons)
 
     def showGraph(self):
-        nx.draw_networkx(self.G, with_labels=False)
+        nx.draw(self.G, node_color=self._getNodeColors, with_labels=False)
         plt.show()
 
 
