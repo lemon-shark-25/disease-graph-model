@@ -1,6 +1,6 @@
 import random
 ALREADY_INFECTED_REDUCTION=0.8
-
+INCUBATION_AVEREGE=5
 
 class Person():
     def __init__(self, name, age):
@@ -16,9 +16,16 @@ class Person():
         self._mulInfect = random.randint(0, 10)
         self._infectedCheck = False
         self._infectedCounter = 0
+        self._fullyIncubated = False
 
     def die(self):
         self._alive = False
+
+    def _duringinfevted(self):
+        if self._infectedCounter == INCUBATION_AVEREGE:
+            self._mulInfect = 2*self._mulInfect
+            fullyIncubated=True
+
 
     def recover(self):
         self._infected = False
@@ -67,3 +74,5 @@ class Person():
     
     def _postinfected(self): 
         self._mulInfect= self._mulInfect*(1-ALREADY_INFECTED_REDUCTION)
+
+    

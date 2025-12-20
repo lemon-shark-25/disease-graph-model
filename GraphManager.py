@@ -56,17 +56,17 @@ class GraphManager():
         plt.show()
 
 
-def _getNodeColors(self):
-    colors = []
+    def _getNodeColors(self):
+        colors = []
 
-    for person in self.G.nodes:
-        if not person._alive:
-            colors.append("black")
-        elif person._infected:
-            colors.append("red")
-        elif person._inmune:
-            colors.append("blue")
-        else:
-            colors.append("green")
+        for person in self.G.nodes:
+            if not person._alive:
+                colors.append("black")
+            elif person._infected:
+                colors.append("red")
+            elif person._inmune:
+                colors.append("blue")
+            else:
+                colors.append("green")
 
-    return colors
+        return colors
