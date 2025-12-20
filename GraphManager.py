@@ -78,6 +78,15 @@ class GraphManager():
             
             while (nodo._alive == True):
 
+
                 nodo.die()
                 nodo.recover()
                 nodo.contractDisease()
+
+        for nodo in self.G.nodes:
+
+            if (nodo._alive == True):
+        
+                nodo.infectedCheck()
+
+

@@ -39,6 +39,14 @@ class Person():
      #   if not self._inmune:
             self._infected = True
 
+    def infectedCheck(self):
+
+        if (self._infectedCheck == True):
+            self._infected = True
+            self._infectedCheck = False
+
+
+
     def set_multDeath(self, value):
              
         if self._previousillness:
@@ -66,13 +74,11 @@ class Person():
             else:
                 self._multRecover = (value * self._age)
 
-
     def set_multInfected(self, value):
         if self._inmune:
             self._multInfected  = value / 3    
         else:
             self._multInfected  = value
-
 
     def set_mulInfect(self, value):
         if  self._compliesRegulations:
@@ -82,7 +88,7 @@ class Person():
 
 
 
-    # Getters for private attributes (if needed for access outside of class)
+
     def get_name(self):
         return self._name
     

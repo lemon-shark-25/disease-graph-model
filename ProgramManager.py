@@ -1,11 +1,16 @@
+import time
 from GraphManager import GraphManager
+
+DAYLIMIT = 100
 
 class ProgramManager:
 
 
+
     def __init__(self):
+
         self.GM = GraphManager()
-        self.Days = 100
+        self.Days = DAYLIMIT
 
 
     def start(self):
