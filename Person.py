@@ -1,6 +1,4 @@
 import random
-ALREADY_INFECTED_REDUCTION=0.8
-INCUBATION_AVEREGE=5
 
 class Person():
     def __init__(self, name, age):
@@ -17,49 +15,80 @@ class Person():
         self._infectedCheck = False
         self._infectedCounter = 0
         self._fullyIncubated = False
+        self._INCUBATION_AVEREGE=5
 
     def die(self):
-        self._alive = False
 
-    def _duringinfevted(self):
-        if self._infectedCounter == INCUBATION_AVEREGE:
-            self._mulInfect = 2*self._mulInfect
-            fullyIncubated=True
+        muereOno= random.randint(0, 100) 
 
+        if (muereOno > self._multDeath):
+                    self._alive = True
+        elif    (muereOno < self._multDeath): 
+                    self._alive = False
 
     def recover(self):
-        self._infected = False
+        seCuraOno= random.randint(0, 100) 
+
+        if    (seCuraOno < self._multRecover): 
+                     self._infected = False
+        else:
+            self._multRecover = self._multRecover + 10   
 
     def contractDisease(self):
-        if not self._inmune:
+         
+     #   if not self._inmune:
             self._infected = True
 
-    # Setters for multipliers
+    def infectedCheck(self):
+
+        if (self._infectedCheck == True):
+            self._infected = True
+            self._infectedCheck = False
+
+
+
     def set_multDeath(self, value):
-        if isinstance(value, int) and 0 <= value <= 10:
-            self._multDeath = value
+             
+        if self._previousillness:
+            if self._treated:
+                m = ((value * self._age)*3.85)
+                self._multDeath = m - ((m*80)/100)
+            else:
+                self._multDeath = ((value * self._age)*3.85)
+        elif self._treated:   
+            c = (value * self._age)
+            self._multDeath = m - ((m*80)/100)  
         else:
-            print("Invalid value for multDeath. It should be an integer between 0 and 10.")
+            self._multDeath = (value * self._age)    
 
     def set_multRecover(self, value):
-        if isinstance(value, int) and 0 <= value <= 10:
-            self._multRecover = value
-        else:
-            print("Invalid value for multRecover. It should be an integer between 0 and 10.")
+            if self._previousillness:
+                if self._treated:
+                    m = ((value * self._age)*3.85)
+                    self._multRecover = m + ((m*80)/100)
+                else:
+                    self._multRecover = ((value * self._age)*3.85)
+            elif self._treated:   
+                c = (value * self._age)
+                self._multRecover = m + ((m*80)/100)  
+            else:
+                self._multRecover = (value * self._age)
 
     def set_multInfected(self, value):
-        if isinstance(value, int) and 0 <= value <= 10:
-            self._multInfected = value
+        if self._inmune:
+            self._multInfected  = value / 3    
         else:
-            print("Invalid value for multInfected. It should be an integer between 0 and 10.")
+            self._multInfected  = value
 
     def set_mulInfect(self, value):
-        if isinstance(value, int) and 0 <= value <= 10:
-            self._mulInfect = value
+        if  self._compliesRegulations:
+            self._mulInfect = value / 3
         else:
-            print("Invalid value for mulInfect. It should be an integer between 0 and 10.")
+            self._mulInfect = value
 
-    # Getters for private attributes (if needed for access outside of class)
+
+
+
     def get_name(self):
         return self._name
     
@@ -72,7 +101,7 @@ class Person():
     def is_infected(self):
         return self._infected
     
-    def _postinfected(self): 
-        self._mulInfect= self._mulInfect*(1-ALREADY_INFECTED_REDUCTION)
+    #def _postinfected(self): 
+       # self._mulInfect= self._mulInfect*(1-ALREADY_INFECTED_REDUCTION)
 
     

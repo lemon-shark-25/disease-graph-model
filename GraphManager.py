@@ -70,3 +70,23 @@ class GraphManager():
                 colors.append("green")
 
         return colors
+
+
+    def recorer (self):
+
+        for nodo in self.G.nodes:
+            
+            while (nodo._alive == True):
+
+
+                nodo.die()
+                nodo.recover()
+                nodo.contractDisease()
+
+        for nodo in self.G.nodes:
+
+            if (nodo._alive == True):
+        
+                nodo.infectedCheck()
+
+
