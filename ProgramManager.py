@@ -5,6 +5,7 @@ class ProgramManager:
 
     def __init__(self):
         self.GM = GraphManager()
+        
 
 
     def start(self):
@@ -13,5 +14,3 @@ class ProgramManager:
         self.GM.showGraph()
 
 
-
-        
