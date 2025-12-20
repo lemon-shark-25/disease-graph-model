@@ -54,3 +54,19 @@ class GraphManager():
     def showGraph(self):
         nx.draw_networkx(self.G, with_labels=False)
         plt.show()
+
+
+def _getNodeColors(self):
+    colors = []
+
+    for person in self.G.nodes:
+        if not person._alive:
+            colors.append("black")
+        elif person._infected:
+            colors.append("red")
+        elif person._inmune:
+            colors.append("blue")
+        else:
+            colors.append("green")
+
+    return colors

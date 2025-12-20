@@ -1,4 +1,6 @@
 import random
+ALREADY_INFECTED_REDUCTION=0.8
+
 
 class Person():
     def __init__(self, name, age):
@@ -7,12 +9,13 @@ class Person():
         self._age = age
         self._alive = True
         self._infected = False
-        self._inmune = False
+        self._alreadyinfected = False
         self._multDeath = random.randint(0, 10)
         self._multRecover = random.randint(0, 10)
         self._multInfected = random.randint(0, 10)
         self._mulInfect = random.randint(0, 10)
         self._infectedCheck = False
+        self._infectedCounter = 0
 
     def die(self):
         self._alive = False
@@ -62,18 +65,5 @@ class Person():
     def is_infected(self):
         return self._infected
     
-    def _getNodeColors(self):
-    colors = []
-
-    for person in self.G.nodes:
-        if not person._alive:
-            colors.append("black")
-        elif person._infected:
-            colors.append("red")
-        elif person._inmune:
-            colors.append("blue")
-        else:
-            colors.append("green")
-
-    return colors
-
+    def _postinfected(self): 
+        self._mulInfect= self._mulInfect*(1-ALREADY_INFECTED_REDUCTION)
