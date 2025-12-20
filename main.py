@@ -1,7 +1,7 @@
+from GraphManager import GraphManager
 
-from ProgramManager import ProgramManager
+GM = GraphManager()
 
+GM.loadGraph()
 
-M = ProgramManager()
-
-M.start()
+GM.showGraph()
