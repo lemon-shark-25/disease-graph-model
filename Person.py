@@ -1,6 +1,8 @@
 import random
 import re
 
+
+
 class Person():
     def __init__(self, name, age):
         
@@ -8,77 +10,15 @@ class Person():
         self._age = age
         self._alive = True
         self._infected = False
-        self._inmune = False
-        self._multDeath = None
-        self._multRecover = None
-        self._multInfected = None
-        self._mulInfect = None
+        self._alreadyinfected = False
+        self._multDeath = random.randint(0, 10)
+        self._multRecover = random.randint(0, 10)
+        self._multInfected = random.randint(0, 10)
+        self._mulInfect = random.randint(0, 10)
         self._infectedCheck = False
-        self._previousillness = False
-        self._treated = False
-        self._compliesRegulations= False
-
-        self.start()
-
-    def start (self):
-
-        prob_seguir_normas = 60  # 60%
-        sigue_normas = random.randint(0, 100) 
-
-        if (sigue_normas > prob_seguir_normas):
-                self._compliesRegulation = False
-        elif    (sigue_normas < prob_seguir_normas):  
-                 self._compliesRegulation = True
-            
-        prob_recibir_tratamiento = 87  # 87%
-        recibe_tratamiento = random.randint(0, 100) 
-
-        if (recibe_tratamiento > prob_recibir_tratamiento):
-                    self._treated = False
-        elif    (recibe_tratamiento < prob_recibir_tratamiento):  
-                    self._treated = True
-
-        prob_Enfermedad_Anterior = 16  # 87%
-        tiene_Enfermedad = random.randint(0, 100) 
-
-        if (tiene_Enfermedad > prob_Enfermedad_Anterior):
-                    self._previousillness = False
-        elif    (tiene_Enfermedad < prob_Enfermedad_Anterior):  
-                    self._previousillness = True
-
-
-        with open("./data/Probabilidad.txt", "r", encoding="utf-8") as f:
-            for linea in f:
-                linea = linea.strip()
-                if not linea:  # saltar líneas vacías
-                    continue
-
-                # Tomar lo que está después de los dos puntos
-                partes = linea.split(":", 1)
-                if len(partes) < 2:
-                    continue
-                valor = partes[1].strip()  # eliminar espacios
-
-                # Quitar el símbolo de porcentaje si existe
-                if valor.endswith("%"):
-                    valor = valor[:-1].strip()
-
-                # Convertir a float
-                try:
-                    valor_num = float(valor)
-                except ValueError:
-                    continue
-
-                # Llamar a la función correspondiente según el símbolo
-                if linea.startswith("-"):
-                    self.set_multDeath(valor_num)
-                elif linea.startswith("+"):
-                    self.set_multRecover(valor_num)
-                elif linea.startswith("*"):
-                    self.set_multInfected(valor_num)
-                elif linea.startswith(">"):
-                    self.set_mulInfect(valor_num)
-
+        self._infectedCounter = 0
+        self._fullyIncubated = False
+        self._INCUBATION_AVEREGE=5
 
     def die(self):
 
@@ -163,4 +103,8 @@ class Person():
 
     def is_infected(self):
         return self._infected
+    
+    #def _postinfected(self): 
+       # self._mulInfect= self._mulInfect*(1-ALREADY_INFECTED_REDUCTION)
+
     
