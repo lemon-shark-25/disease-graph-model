@@ -7,9 +7,9 @@ class Person():
         
         self._name = name
         self._age = age
-        self._alive = True
+        self._alive = False
         self._infected = False
-        self._alreadyinfected = False
+        self._alreadyinfected = True
         self._multDeath = random.randint(0, 10)
         self._multRecover = random.randint(0, 10)
         self._multInfected = random.randint(0, 10)
