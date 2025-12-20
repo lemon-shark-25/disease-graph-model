@@ -64,7 +64,7 @@ class GraphManager():
                 colors.append("black")
             elif person._infected:
                 colors.append("red")
-            elif person._inmune:
+            elif person._alreadyinfected:
                 colors.append("blue")
             else:
                 colors.append("green")
