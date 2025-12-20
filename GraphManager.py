@@ -1,5 +1,5 @@
-import networkx as nx
-import matplotlib.pyplot as plt
+import networkx as nx # type: ignore
+import matplotlib.pyplot as plt # type: ignore
 import csv
 from Person import Person
 
