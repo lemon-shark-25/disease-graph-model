@@ -40,7 +40,8 @@ class Person():
 
 
     def contractDisease(self):
-        if not self._inmune:
+         
+     #   if not self._inmune:
             self._infected = True
 
 
