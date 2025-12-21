@@ -9,6 +9,12 @@ class GraphManager():
         self.G = nx.Graph()
         self.time = 0
 
+        plt.ion()
+        self.fig, self.ax = plt.subplots()
+
+        self.pos = None  # posiciones fijas
+
+
     def _loadNodes(self, path):
         """
         Carga personas desde CSV y devuelve un diccionario {id: Person}
@@ -45,15 +51,26 @@ class GraphManager():
                 self.G.add_edge(persons[n1], persons[n2], weight=weight)
 
     def loadGraph(self):
-        """
-        Método principal de carga del grafo
-        """
         persons = self._loadNodes("./data/nodes.csv")
         self._loadEdges("./data/edges.csv", persons)
 
+        # layout fijo (una sola vez)
+        self.pos = nx.circular_layout(self.G)
+
+
     def showGraph(self):
-        nx.draw(self.G, node_color=self._getNodeColors(), with_labels=False)
-        plt.show()
+        self.ax.clear()
+
+        nx.draw(
+            self.G,
+            pos=self.pos,           # ⬅ círculo fijo
+            ax=self.ax,
+            node_color=self._getNodeColors(),
+            with_labels=False
+        )
+
+        plt.pause(0.5)
+
 
 
     def _getNodeColors(self):
@@ -74,14 +91,19 @@ class GraphManager():
 
     def recorer (self):
 
+        def recorrer(self):
+            for _ in range(50):  # pasos de simulación
+                for nodo in self.G.nodes:
+                    if nodo._alive:
+                        nodo.contractDisease()
+                        nodo.recover()
+                        nodo.die()
+
         for nodo in self.G.nodes:
-            
-            while (nodo._alive == True):
+            if nodo._alive:
+                nodo.infectedCheck()
 
-
-                nodo.die()
-                nodo.recover()
-                nodo.contractDisease()
+        self.showGraph()
 
         for nodo in self.G.nodes:
 
