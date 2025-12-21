@@ -1,12 +1,12 @@
 import random
 PROB_BASE = 0.05
 class Person():
-    def __init__(self, name, age):
+    def __init__(self, name, age, infected):
         
         self._name = name
         self._age = age
         self._alive = True
-        self._infected = True
+        self._infected = infected
         self._treated=True
         self._alreadyinfected = False
         self._multDeath = 0

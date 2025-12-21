@@ -26,13 +26,18 @@ class GraphManager():
             reader = csv.DictReader(file)
             for row in reader:
                 pid = int(row["id"])
-                person = Person(row["nombre"], int(row["edad"]))
+                nombre = row["name"]
+                edad = int(row["age"])
+                infectado = row["infected"].strip() == 'Y' # Convertir 'Sí' o 'No' a booleano
+                if infectado:
+                    self._infected_total += 1
+
+                # Crear una instancia de Person pasando los parámetros correctos
+                person = Person(nombre, edad, infectado)
 
                 persons[pid] = person
-                self.G.add_node(person)
-
-        return persons
-
+                self.G.add_node(person)  # Asumiendo que 'self.G' es un grafo o algo similar
+            return persons
 
     def _loadEdges(self, path, persons):
         """
@@ -99,6 +104,7 @@ class GraphManager():
                 infected_now += 1
 
         return infected_now
+
     def recorer(self):
         steps = 50
 
@@ -114,7 +120,8 @@ class GraphManager():
                 nodo.infectedCheck()
                 nodo.day_pased()
 
-            actuales = self.get_infection_stats()
+            #actuales = self.get_infection_stats()
+            actuales = self._infected_total
             print(f"Paso {step}: actuales={actuales}")
 
             self.showGraph()
