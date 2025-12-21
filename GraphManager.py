@@ -106,7 +106,7 @@ class GraphManager():
 
             for nodo in self.G.nodes:
                 if nodo._alive:
-                    nodo.contractDisease(self.G)
+                    nodo.contractDisease(self.G, self)
                     nodo.recover()
                     nodo.die()
 

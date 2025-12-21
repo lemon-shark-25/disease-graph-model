@@ -49,7 +49,7 @@ class Person():
 
     
 
-    def contractDisease(self, graph):
+    def contractDisease(self, graph, GM):
        
         if not self._alive or self._infected:
             return
@@ -79,7 +79,7 @@ class Person():
          
             if random.random() < P:
                 self._infectedCheck = True
-                self.GM._infected_total+=1
+                GM._infected_total+=1
                 return  
 
         
