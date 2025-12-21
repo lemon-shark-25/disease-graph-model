@@ -79,7 +79,7 @@ class Person():
          
             if random.random() < P:
                 self._infectedCheck = True
-                GM._infected_total+=1
+                self.GM._infected_total+=1
                 return  
 
         
