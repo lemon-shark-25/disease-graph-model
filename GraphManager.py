@@ -4,8 +4,9 @@ import csv
 from Person import Person
 
 class GraphManager():
-
+    
     def __init__(self):
+        self._infected_total = 0
         self.G = nx.Graph()
         self.time = 0
 
@@ -14,7 +15,7 @@ class GraphManager():
 
         self.pos = None  # posiciones fijas
 
-
+    
     def _loadNodes(self, path):
         """
         Carga personas desde CSV y devuelve un diccionario {id: Person}
@@ -87,28 +88,33 @@ class GraphManager():
                 colors.append("green")
 
         return colors
+    
 
-
-    def recorer (self):
-
-        def recorrer(self):
-            for _ in range(50):  # pasos de simulación
-                for nodo in self.G.nodes:
-                    if nodo._alive:
-                        nodo.contractDisease()
-                        nodo.recover()
-                        nodo.die()
-
-        for nodo in self.G.nodes:
-            if nodo._alive:
-                nodo.infectedCheck()
-
-        self.showGraph()
-
-        for nodo in self.G.nodes:
-
-            if (nodo._alive == True):
+    def get_infection_stats(self):
+        infected_now = 0
         
+
+        for nodo in self.G.nodes:
+            if nodo._infected:
+                infected_now += 1
+
+        return infected_now
+    def recorer(self):
+        steps = 50
+
+        for step in range(steps):
+
+            for nodo in self.G.nodes:
+                if nodo._alive:
+                    nodo.contractDisease(self.G)
+                    nodo.recover()
+                    nodo.die()
+
+            for nodo in self.G.nodes:
                 nodo.infectedCheck()
+                nodo.day_pased()
 
+            actuales = self.get_infection_stats()
+            print(f"Paso {step}: actuales={actuales}")
 
+            self.showGraph()

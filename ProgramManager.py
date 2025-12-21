@@ -22,14 +22,14 @@ class ProgramManager:
 
 
     def program (self):
+      
+            while self.Days >= 0:  # mientras sea mayor o igual a 0
+                
+                self.GM.recorer()
 
-        while self.Days >= 0:  # mientras sea mayor o igual a 0
+                self.GM.showGraph()
 
-            self.GM.recorer()
+                time.sleep(3)
 
-            self.GM.showGraph()
-
-            time.sleep(3)
-
-              
-            self.Days = self.Days -1
+                
+                self.Days = self.Days -1
