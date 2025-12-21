@@ -79,6 +79,7 @@ class Person():
          
             if random.random() < P:
                 self._infectedCheck = True
+                self._alreadyinfected = True
                 GM._infected_total+=1
                 return  
 
