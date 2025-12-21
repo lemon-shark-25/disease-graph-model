@@ -1,7 +1,7 @@
 import random
-PROB_BASE = 0.05
+PROB_BASE = 1
 class Person():
-    def __init__(self, name, age, infected):
+    def __init__(self, name, age, infected, responsible):
         
         self._name = name
         self._age = age
@@ -9,10 +9,16 @@ class Person():
         self._infected = infected
         self._treated=True
         self._alreadyinfected = False
-        self._multDeath = 0
+        self._multDeath = 0.05
         self._multRecover = 0
-        self._multInfected = random.randint(0, 2)
-        self._mulInfect = random.randint(0, 2)
+        # Datos recogidos de la investigación
+        if responsible:     
+            self._multInfected = 0.1
+            self._mulInfect = 0.1
+        else:
+            self._multInfected = 0.8
+            self._mulInfect = 0.8
+
         self._infectedCheck = False
         self._infectedCounter = 0
         self._fullyIncubated = False
@@ -21,11 +27,12 @@ class Person():
         self._INCUBATION_AVEREGE=5
         self._daysinfected=0
         self._ill=False
+        
 
 
     def die(self):
             
-            P = 0.005 * self._multDeath
+            P = self.get_age() / 100 * self._multDeath
             if P > 1.0:
                 P = 1.0
 

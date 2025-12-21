@@ -29,11 +29,12 @@ class GraphManager():
                 nombre = row["name"]
                 edad = int(row["age"])
                 infectado = row["infected"].strip() == 'Y' # Convertir 'Sí' o 'No' a booleano
+                responsible = row["responsible"].strip() == 'Y'
                 if infectado:
                     self._infected_total += 1
 
                 # Crear una instancia de Person pasando los parámetros correctos
-                person = Person(nombre, edad, infectado)
+                person = Person(nombre, edad, infectado, responsible)
 
                 persons[pid] = person
                 self.G.add_node(person)  # Asumiendo que 'self.G' es un grafo o algo similar
