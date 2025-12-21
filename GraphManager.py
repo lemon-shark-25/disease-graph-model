@@ -120,8 +120,7 @@ class GraphManager():
                 nodo.infectedCheck()
                 nodo.day_pased()
 
-            #actuales = self.get_infection_stats()
-            actuales = self._infected_total
+            actuales = self.get_infection_stats()
             print(f"Paso {step}: actuales={actuales}")
 
             self.showGraph()
